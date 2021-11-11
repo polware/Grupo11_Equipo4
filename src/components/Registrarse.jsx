@@ -1,9 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-//import Link from '@mui/material/Link';
 import { NavLink } from "react-router-dom";
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -11,6 +10,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Axios from 'axios'
+import Swal from 'sweetalert2'
 
 function Copyright(props) {
     return (
@@ -24,15 +25,34 @@ function Copyright(props) {
 
 const theme = createTheme();
 export default function Registrarse() {
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        // eslint-disable-next-line no-console
-        console.log({
-          correo: data.get('correo'),
-          contrasena: data.get('contrasena'),
-        });
+  const [nombres,setNombres]=useState('')
+  const [apellidos,setApellidos]=useState('')
+  const [identificacion,setIdentificacion]=useState('')
+  const [contrasena,setContrasena]=useState('')
+  const [correo,setCorreo]=useState('')
+
+  const guardar = async(e) => {
+      e.preventDefault();
+      const student={
+          nombres,
+          apellidos,
+          identificacion,
+          contrasena,
+          correo,
+      }        
+      const respuesta=await Axios.post('/estudiante/crear', student);
+      const mensaje= respuesta.data.mensaje
+      Swal.fire({
+          icon: 'success',
+          title: mensaje,
+          showConfirmButton: false,
+          timer: 1500
+          })
+          setTimeout(()=>{
+              window.location.href='/'
+          },1500)
       };
+
       return (
         <ThemeProvider theme={theme}>
           <Container component="main" maxWidth="xs">
@@ -49,22 +69,22 @@ export default function Registrarse() {
                 <LockOutlinedIcon/>
             </Avatar>
             <Typography component="h1" variant="h5">Registrar Cuenta</Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+            <Box component="form" noValidate onSubmit={guardar} sx={{ mt: 3 }}>
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={6}>
-                    <TextField autoComplete="nombre" name="nombres" required fullWidth id="nombres" label="Nombre(s)" autoFocus/>
+                    <TextField name="nombres" required fullWidth id="nombres" label="Nombre(s)" autoFocus onChange={(e)=>setNombres(e.target.value)}/>
                   </Grid>
                   <Grid item xs={12} sm={6}>
-                    <TextField required fullWidth id="apellidos" label="Apellido(s)" name="apellidos" autoComplete="apellidos"/>
+                    <TextField required fullWidth id="apellidos" label="Apellido(s)" name="apellidos" onChange={(e)=>setApellidos(e.target.value)}/>
                   </Grid>
                   <Grid item xs={12}>
-                    <TextField required fullWidth id="identificacion" label="N° Identificación" name="id" autoComplete="correo"/>
+                    <TextField required fullWidth id="identificacion" label="N° Identificación" name="id" onChange={(e)=>setIdentificacion(e.target.value)}/>
                   </Grid>
                   <Grid item xs={12}>
-                    <TextField required fullWidth id="correo" label="Correo Electrónico" name="correo" autoComplete="correo"/>
+                    <TextField required fullWidth id="correo" label="Correo Electrónico" name="correo" onChange={(e)=>setCorreo(e.target.value)}/>
                   </Grid>
                   <Grid item xs={12}>
-                    <TextField required fullWidth name="password" label="Contraseña" type="password" id="password" autoComplete="new-password"/>
+                    <TextField required fullWidth name="contrasena" label="Contraseña" type="password" id="contrasena" onChange={(e)=>setContrasena(e.target.value)}/>
                   </Grid>
                 </Grid>
                 <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>Registrarse</Button>
