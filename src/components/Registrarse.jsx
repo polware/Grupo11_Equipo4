@@ -81,7 +81,7 @@ export default function Registrarse() {
                     <TextField required fullWidth id="identificacion" label="N° Identificación" name="id" onChange={(e)=>setIdentificacion(e.target.value)}/>
                   </Grid>
                   <Grid item xs={12}>
-                    <TextField required fullWidth id="correo" label="Correo Electrónico" name="correo" onChange={(e)=>setCorreo(e.target.value)}/>
+                    <TextField required fullWidth id="correo" label="Correo Electrónico" type="email" onChange={(e)=>setCorreo(e.target.value)}/>
                   </Grid>
                   <Grid item xs={12}>
                     <TextField required fullWidth name="contrasena" label="Contraseña" type="password" id="contrasena" onChange={(e)=>setContrasena(e.target.value)}/>

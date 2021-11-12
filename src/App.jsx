@@ -7,16 +7,18 @@ import Registrarse from './components/Registrarse';
 import Inicio from './components/Inicio';
 import Quienessomos from './components/Quienessomos';
 import Contactenos from './components/Contactenos';
+import Actualizar from './components/Actualizar';
 
 function App() {
   return (    
       <Router>
         <Navbar/>
         <Switch>
-          <Route path="/" exact component={Inicio} />
-          <Route path="/Quienessomos" component={Quienessomos} />
-          <Route path="/Contactenos" component={Contactenos} />
-          <Route path="/Registrarse" component={Registrarse} />
+          <Route path="/" exact component={Inicio}/>
+          <Route path="/Quienessomos" component={Quienessomos}/>
+          <Route path="/Contactenos" component={Contactenos}/>
+          <Route path="/Registrarse" component={Registrarse}/>
+          <Route path="/Actualizar" component={Actualizar}/>
         </Switch>
         <Footer/>
       </Router>
