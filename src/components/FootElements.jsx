@@ -6,5 +6,6 @@ export const Foot = styled.nav`
     height: 210px;
     display: flex;
     align-items: center;
+    font-size: 85%;
     padding: 0.2rem calc((100vw - 1000px) / 2);    
 `;

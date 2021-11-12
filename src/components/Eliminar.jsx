@@ -1,14 +1,13 @@
 import React, { useState } from 'react'
 import CssBaseline from '@mui/material/CssBaseline';
 import Avatar from '@mui/material/Avatar';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import DeleteIcon from '@mui/icons-material/Delete';
 import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-//import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Axios from 'axios'
@@ -16,7 +15,7 @@ import Swal from 'sweetalert2'
 
 const theme = createTheme();
 
-export default function Actualizar(props) {
+export default function Eliminar() {
     const [nombres,setNombres]=useState('')
     const [apellidos,setApellidos]=useState('')
     const [identificacion,setIdentificacion]=useState('')
@@ -26,35 +25,22 @@ export default function Actualizar(props) {
     const [colegio,setColegio]=useState('')
     const [ciudad,setCiudad]=useState('')
 
-    const actualizar= async(e)=>{
-        e.preventDefault();
-        const id=props.match.params.id
-        const token= sessionStorage.getItem('token')
-        const student={
-            nombres,
-            apellidos,
-            identificacion,
-            contrasena,
-            correo,
-            fechanac,
-            colegio,
-            ciudad
-        }
-        const respuesta= await Axios.put('/estudiante/actualizar/'+id, student,{
+    const borrar= async(id)=>{
+    const token= sessionStorage.getItem('token')
+    const respuesta= await Axios.delete('/estudiante/eliminar/'+id,{
             headers:{'autorizacion':token}
         })
-        const mensaje=respuesta.data.mensaje        
-        Swal.fire({              
-            icon: 'success',
+    const mensaje=respuesta.data.mensaje
+    Swal.fire({              
+            icon: 'error',
             title: mensaje,
             showConfirmButton: false,
             timer: 1500
               })
-            setTimeout(()=>{
-                window.location.href='/'
-             },1500)
-    }
 
+            //obtenerEmpleados()
+    }
+    
     return (
         <ThemeProvider theme={theme}>        
         <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
@@ -66,14 +52,14 @@ export default function Actualizar(props) {
                 flexDirection: 'column',
                 alignItems: 'center',
               }}>
-            <Avatar sx={{ m: 1, bgcolor: 'success.main' }}>
-                <AccountCircleIcon/>
+            <Avatar sx={{ m: 1, bgcolor: 'error.main' }}>
+                <DeleteIcon/>
             </Avatar>
             <Typography component="h1" variant="h4" align="center">
-                Actualizar Datos Estudiante
+                Eliminar Cuenta Estudiante
             </Typography>
             <br/>
-            <Box component="form" noValidate onSubmit={actualizar} sx={{ mt: 3 }}>
+            <Box component="form" noValidate sx={{ mt: 3 }}>
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={6}>
                     <TextField required id="nombres" label="Nombre(s)" type="text" fullWidth onChange={e => setNombres(e.target.value)} value={nombres}/>
@@ -100,7 +86,7 @@ export default function Actualizar(props) {
                     <TextField required id="colegio" label="Colegio" type="text" fullWidth onChange={e => setColegio(e.target.value)} value={colegio}/>
                     </Grid>                
                 </Grid>
-                <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }} color="success">Actualizar</Button>
+                <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }} onClick={()=>borrar(id)} color="error">Eliminar</Button>          
             </Box>
             </Box>
         </Paper>        
@@ -108,3 +94,4 @@ export default function Actualizar(props) {
         </ThemeProvider>
     );
 }
+
