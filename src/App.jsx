@@ -8,6 +8,7 @@ import Inicio from './components/Inicio';
 import Quienessomos from './components/Quienessomos';
 import Contactenos from './components/Contactenos';
 import Actualizar from './components/Actualizar';
+import Test from './components/Test';
 
 function App() {
   return (    
@@ -18,6 +19,7 @@ function App() {
           <Route path="/Quienessomos" component={Quienessomos}/>
           <Route path="/Contactenos" component={Contactenos}/>
           <Route path="/Registrarse" component={Registrarse}/>
+          <Route path="/Test" component={Test}/>
           <Route path="/Actualizar" component={Actualizar}/>
         </Switch>
         <Footer/>

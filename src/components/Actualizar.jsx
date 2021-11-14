@@ -8,8 +8,8 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-//import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
+import SaveIcon from '@mui/icons-material/Save';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Axios from 'axios'
 import Swal from 'sweetalert2'
@@ -59,7 +59,7 @@ export default function Actualizar(props) {
         <ThemeProvider theme={theme}>        
         <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
         <CssBaseline />        
-        <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
+        <Paper variant="outlined" elevation={8} sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
             <Box sx={{
                 marginTop: 1,
                 display: 'flex',
@@ -100,10 +100,10 @@ export default function Actualizar(props) {
                     <TextField required id="colegio" label="Colegio" type="text" fullWidth onChange={e => setColegio(e.target.value)} value={colegio}/>
                     </Grid>                
                 </Grid>
-                <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }} color="success">Actualizar</Button>
+                <Button type="submit" fullWidth variant="contained" startIcon={<SaveIcon/>} sx={{ mt: 3, mb: 2 }} color="success">Actualizar</Button>
             </Box>
             </Box>
-        </Paper>        
+        </Paper>
         </Container>
         </ThemeProvider>
     );

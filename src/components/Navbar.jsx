@@ -27,6 +27,9 @@ export default function Navbar() {
                 <NavLink to="/Registrarse">
                     Registrarse
                 </NavLink>
+                <NavLink to="/Test">
+                    Test
+                </NavLink>
                 <NavBtn>
                     <NavBtnLink to="/Actualizar">Login</NavBtnLink>
                 </NavBtn>

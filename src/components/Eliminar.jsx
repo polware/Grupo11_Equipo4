@@ -9,6 +9,7 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Axios from 'axios'
 import Swal from 'sweetalert2'
@@ -86,7 +87,7 @@ export default function Eliminar() {
                     <TextField required id="colegio" label="Colegio" type="text" fullWidth onChange={e => setColegio(e.target.value)} value={colegio}/>
                     </Grid>                
                 </Grid>
-                <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }} onClick={()=>borrar(id)} color="error">Eliminar</Button>          
+                <Button type="submit" fullWidth variant="contained" startIcon={<DeleteForeverIcon/>} sx={{ mt: 3, mb: 2 }} onClick={()=>borrar(id)} color="error">Eliminar</Button>          
             </Box>
             </Box>
         </Paper>        
