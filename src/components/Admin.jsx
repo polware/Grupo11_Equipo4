@@ -125,9 +125,9 @@ export default function Admin() {
                 <SupervisorAccountIcon/>
             </Avatar>
             <Typography component="h1" variant="h3" color="blue">Perfil Administrador: [{sessionStorage.getItem('nombre')}]</Typography>
-            <Button type="submit" variant="contained" startIcon={<LogoutIcon/>} sx={{ mt: 3, mb: 2 }} color="error" onClick={()=>salir()}>Cerrar Sesión</Button>
+            <Button type="submit" variant="contained" startIcon={<LogoutIcon/>} sx={{ mt: 3, mb: 2 }} color="info" onClick={()=>salir()}>Cerrar Sesión</Button>
             </Box>
-            <Box sx={{ bgcolor: '#DCDFCA', width: '100%' }}>
+            <Box sx={{ bgcolor: '#E1E1DF', width: '100%' }}>
             <hr/>
             <Tabs value={value} onChange={handleChange} textColor="primary" centered indicatorColor="primary" variant="fullWidth" aria-label="full width tabs example">
             <Tab label="Tabla Estudiantes" {...a11yProps(0)} />                
@@ -139,7 +139,7 @@ export default function Admin() {
                     <Table sx={{ minWidth: 700 }} aria-label="customized table">
                         <TableHead>
                         <TableRow>
-                            <StyledTableCell># ID</StyledTableCell>
+                            <StyledTableCell>#</StyledTableCell>
                             <StyledTableCell align="center">Nombre(s)</StyledTableCell>
                             <StyledTableCell align="center">Apellido(s)</StyledTableCell>
                             <StyledTableCell align="center">Identificación</StyledTableCell>
@@ -174,7 +174,7 @@ export default function Admin() {
                     <Table sx={{ minWidth: 700 }} aria-label="customized table">
                         <TableHead>
                         <TableRow>
-                            <StyledTableCell># ID</StyledTableCell>
+                            <StyledTableCell>#</StyledTableCell>
                             <StyledTableCell align="center">Nombre(s) y Apellido(s)</StyledTableCell>
                             <StyledTableCell align="center">Correo Electrónico</StyledTableCell>
                             <StyledTableCell align="center">Institución</StyledTableCell>
