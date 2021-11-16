@@ -9,6 +9,9 @@ import Quienessomos from './components/Quienessomos';
 import Contactenos from './components/Contactenos';
 import Actualizar from './components/Actualizar';
 import Test from './components/Test';
+import Login from './components/Login';
+import Admin from './components/Admin';
+import Eliminar from './components/Eliminar';
 
 function App() {
   return (    
@@ -19,8 +22,11 @@ function App() {
           <Route path="/Quienessomos" component={Quienessomos}/>
           <Route path="/Contactenos" component={Contactenos}/>
           <Route path="/Registrarse" component={Registrarse}/>
-          <Route path="/Test" component={Test}/>
+          <Route path="/Test" component={Test}/>          
+          <Route path="/Login" component={Login}/>
+          <Route path="/Admin" component={Admin}/>
           <Route path="/Actualizar" component={Actualizar}/>
+          <Route path="/Eliminar" component={Eliminar}/>
         </Switch>
         <Footer/>
       </Router>

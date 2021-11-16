@@ -87,7 +87,7 @@ export default function Eliminar() {
                     <TextField required id="colegio" label="Colegio" type="text" fullWidth onChange={e => setColegio(e.target.value)} value={colegio}/>
                     </Grid>                
                 </Grid>
-                <Button type="submit" fullWidth variant="contained" startIcon={<DeleteForeverIcon/>} sx={{ mt: 3, mb: 2 }} onClick={()=>borrar(id)} color="error">Eliminar</Button>          
+                <Button type="submit" fullWidth variant="contained" startIcon={<DeleteForeverIcon/>} sx={{ mt: 3, mb: 2 }} onClick={()=>borrar()} color="error">Eliminar</Button>          
             </Box>
             </Box>
         </Paper>        

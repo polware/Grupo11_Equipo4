@@ -24,14 +24,11 @@ export default function Navbar() {
                 <NavLink to="/Contactenos">
                     Contáctenos
                 </NavLink>
-                <NavLink to="/Registrarse">
-                    Registrarse
-                </NavLink>
                 <NavLink to="/Test">
                     Test
                 </NavLink>
                 <NavBtn>
-                    <NavBtnLink to="/Actualizar">Login</NavBtnLink>
+                    <NavBtnLink to="/Login">Admin</NavBtnLink>
                 </NavBtn>
             </NavMenu> 
            </Nav> 
