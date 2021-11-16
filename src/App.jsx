@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Registrarse from './components/Registrarse';
 import Inicio from './components/Inicio';
+import Recuperar from './components/Recuperar';
 import Quienessomos from './components/Quienessomos';
 import Contactenos from './components/Contactenos';
 import Actualizar from './components/Actualizar';
@@ -19,6 +20,7 @@ function App() {
         <Navbar/>
         <Switch>
           <Route path="/" exact component={Inicio}/>
+          <Route path="/Recuperar" exact component={Recuperar}/>
           <Route path="/Quienessomos" component={Quienessomos}/>
           <Route path="/Contactenos" component={Contactenos}/>
           <Route path="/Registrarse" component={Registrarse}/>

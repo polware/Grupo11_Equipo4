@@ -15,7 +15,10 @@ import VpnKeyIcon from '@mui/icons-material/VpnKey';
 const theme = createTheme();
 
 function Recuperar() {
-  
+  const volver=()=>{
+    window.location.href="/"    
+  }
+
   return (
     <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="md">
@@ -49,9 +52,9 @@ function Recuperar() {
                     id="email"
                   />
                 </Grid>
-              </Grid>              
+              </Grid>
               <Button type="submit" variant="contained" startIcon={<SearchIcon/>} sx={{ mt: 3, mb: 2, ml: 3 }} color="success">Buscar</Button>&nbsp;
-              <Button type="submit" variant="contained" startIcon={<ArrowBackIcon/>} sx={{ mt: 3, mb: 2 }}>Volver</Button>
+              <Button type="submit" variant="contained" startIcon={<ArrowBackIcon/>} sx={{ mt: 3, mb: 2 }} onClick={()=>volver()}>Volver</Button>
           </Box>    
           </Box>
           <br/>
