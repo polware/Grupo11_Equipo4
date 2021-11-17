@@ -1,7 +1,7 @@
-const Auth = {}
+const Authest = {}
 const jwt = require('jsonwebtoken');
 
-Auth.verificarToken = (req, res, next) =>{
+Authest.verificarToken = (req, res, next) =>{
     if(!req.headers.autorizacion){
         return res.json({
             mensaje:'No está autorizado'
@@ -13,16 +13,7 @@ Auth.verificarToken = (req, res, next) =>{
             mensaje:'No está autorizado'
         })
     }
-
-    jwt.verify(token,'Adm1n',(error, resultado) =>{
-        if(error){
-            return res.json({
-                mensaje:'No está autorizado'
-            })            
-        }
-        next()
-    })
-
+    
     jwt.verify(token,'Student',(error, resultado) =>{
         if(error){
             return res.json({
@@ -31,6 +22,7 @@ Auth.verificarToken = (req, res, next) =>{
         }
         next()
     })
+    
 }
 
-module.exports = Auth;
+module.exports = Authest;

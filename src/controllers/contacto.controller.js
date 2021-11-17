@@ -22,4 +22,12 @@ contactoControl.listar= async(req, res)=>{
     res.json(respuesta)
 }
 
+contactoControl.eliminar = async(req,res) => {
+    const id = req.params.id;
+    await contacto.findByIdAndRemove({_id:id});
+    res.json({
+        mensaje:'Contacto eliminado'
+    })
+}
+
 module.exports=contactoControl

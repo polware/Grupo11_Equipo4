@@ -73,7 +73,15 @@ estudianteControl.eliminar = async(req,res) => {
     })
 }
 
-estudianteControl.actualizar = async(req,res) => {
+estudianteControl.actualizarAdmin = async(req,res) => {
+    const id = req.params.id;
+    await estudiante.findByIdAndUpdate({_id:id}, req.body)
+    res.json({
+        mensaje:'Estudiante actualizado'
+    })
+}
+
+estudianteControl.actualizarEstudiante = async(req,res) => {
     const id = req.params.id;
     await estudiante.findByIdAndUpdate({_id:id}, req.body)
     res.json({
