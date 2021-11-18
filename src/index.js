@@ -19,6 +19,7 @@ app.use(cors());
 app.use('/administrador', require('./routes/admin.route'))
 app.use('/estudiante', require('./routes/estudiante.route'))
 app.use('/contactos', require('./routes/contacto.route'))
+app.use('/resultados', require('./routes/resultado.route'))
 
 //Configuramos el Puerto
 app.set('puerto', process.env.PORT || 4000);

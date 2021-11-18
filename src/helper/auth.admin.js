@@ -22,7 +22,7 @@ Auth.verificarToken = (req, res, next) =>{
         }
         next()
     })
-    
+
 }
 
 module.exports = Auth;
