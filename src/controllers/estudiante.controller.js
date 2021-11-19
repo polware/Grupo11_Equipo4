@@ -41,7 +41,7 @@ estudianteControl.login = async(req, res) => {
     if(match) {
         const token = jwt.sign({_id:Estudiante._id }, 'Student');
         res.json({
-            mensaje: 'Bienvenid@',
+            mensaje: 'Bienvenido',
             id:Estudiante._id,
             nombre:Estudiante.nombre,
             token
