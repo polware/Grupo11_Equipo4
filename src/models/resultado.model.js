@@ -3,7 +3,7 @@ const {Schema} = mongoose;
 
 const resultadoSchema = new Schema({
     identidad: String,
-    name: String,
+    nombre: String,
     letraintereses: String,
     letraaptitudes: String,
 	ramaintereses: String,
