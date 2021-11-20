@@ -43,7 +43,7 @@ estudianteControl.login = async(req, res) => {
         res.json({
             mensaje: 'Bienvenido',
             id:Estudiante._id,
-            nombre:Estudiante.nombre,
+            nombre:Estudiante.nombres,
             token
         })
     }
@@ -63,6 +63,14 @@ estudianteControl.listarID = async(req,res) => {
     const id = req.params.id;
     const respuesta = await estudiante.findOne({_id:id});
     res.json(respuesta)
+}
+
+estudianteControl.eliminarAdmin = async(req,res) => {
+    const id = req.params.id;
+    await estudiante.findByIdAndRemove({_id:id});
+    res.json({
+        mensaje:'Estudiante eliminado'
+    })
 }
 
 estudianteControl.eliminar = async(req,res) => {

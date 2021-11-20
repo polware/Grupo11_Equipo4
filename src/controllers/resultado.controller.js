@@ -2,10 +2,10 @@ const resultadoControl = {}
 const resultado = require('../models/resultado.model');
 
 resultadoControl.crearResultado = async(req,res)=>{
-    const { identidad, name, letraintereses, letraaptitudes, ramaintereses, ramaaptitudes, preguntasafirmativas }=req.body
+    const { identidad, nombre, letraintereses, letraaptitudes, ramaintereses, ramaaptitudes, preguntasafirmativas }=req.body
     const nuevoResultado= new resultado({
             identidad,
-            name,
+            nombre,
             letraintereses,
             letraaptitudes,
             ramaintereses,

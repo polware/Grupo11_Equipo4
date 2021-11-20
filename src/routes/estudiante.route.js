@@ -14,6 +14,7 @@ router.put('/actualizar/:id', Authest.verificarToken, estudianteController.actua
 router.get('/listar', Auth.verificarToken, estudianteController.listar);
 router.get('/listar/:id', Auth.verificarToken, estudianteController.listarID);
 router.put('/actualizarAdmin/:id', Auth.verificarToken, estudianteController.actualizarAdmin);
+router.delete('/eliminarAdmin/:id', Auth.verificarToken, estudianteController.eliminarAdmin);
 router.get('/buscar/:nombres', Auth.verificarToken, estudianteController.buscarEstudiante);
 
 module.exports = router;
