@@ -4,7 +4,7 @@ const estudianteController = require('../controllers/estudiante.controller');
 const Auth = require('../helper/auth.admin');
 const Authest = require('../helper/auth.est');
 
-//router.post('/crear', Auth.verificarToken, estudianteController.crear);
+// Estudiante
 router.post('/crear', estudianteController.crear);
 router.post('/login', estudianteController.login);
 router.delete('/eliminar/:id', Authest.verificarToken, estudianteController.eliminar);

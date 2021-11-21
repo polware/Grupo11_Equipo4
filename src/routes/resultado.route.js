@@ -6,7 +6,7 @@ const Authest = require('../helper/auth.est');
 
 router.post('/crear', resultadoController.crearResultado);
 router.get('/listar', Auth.verificarToken, resultadoController.listar);
-router.get('/listarID', Authest.verificarToken, resultadoController.listarID);
+router.get('/listarID/:id', Authest.verificarToken, resultadoController.listarID);
 router.get('/listarIDadmin', Auth.verificarToken, resultadoController.listarIDadmin);
 router.get('/eliminar', Auth.verificarToken, resultadoController.eliminar);
 

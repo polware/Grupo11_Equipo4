@@ -42,7 +42,9 @@ estudianteControl.login = async(req, res) => {
         const token = jwt.sign({_id:Estudiante._id }, 'Student');
         res.json({
             mensaje: 'Bienvenido',
-            id:Estudiante._id,
+            //id:Estudiante._id,
+            id:Estudiante.identificacion,
+            identificacion:Estudiante.identificacion,
             nombre:Estudiante.nombres,
             token
         })
