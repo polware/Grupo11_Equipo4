@@ -10,6 +10,7 @@ import Quienessomos from './components/Quienessomos';
 import Contactenos from './components/Contactenos';
 import Actualizar from './components/Actualizar';
 import Test from './components/Test';
+import Resultados from './components/Resultados';
 import Login from './components/Login';
 import Admin from './components/Admin';
 import Eliminar from './components/Eliminar';
@@ -65,6 +66,11 @@ const authRequiredRoutes = [
     path: '/Test',
     exact: true,
     component: <Test/>
+  },
+  {
+    path: '/Resultados',
+    exact: true,
+    component: <Resultados/>
   },
   {
     path: '/Actualizar',
