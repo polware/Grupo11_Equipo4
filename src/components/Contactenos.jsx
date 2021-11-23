@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import Axios from 'axios'
+import Swal from 'sweetalert2'
 import CssBaseline from '@mui/material/CssBaseline';
 import SendIcon from '@mui/icons-material/Send';
 import TextField from '@mui/material/TextField';
@@ -14,13 +16,33 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme();
 
-export default function Contactenos(props) {
-    const [nombres,setNombres]=useState('')
-    const [apellidos,setApellidos]=useState('')
-    const [correo,setCorreo]=useState('')
-    const [colegio,setColegio]=useState('')
-    const [mensaje,setMensaje]=useState('')
+export default function Contactenos() {
+    const [nombreapellido, setNombreApellido] = useState('')    
+    const [correo, setCorreo] = useState('')
+    const [institucion, setInstitucion] = useState('')
+    const [mensaje, setMensaje] = useState('')
 
+    const guardar = async(e) => {
+        e.preventDefault();        
+        const contacto = {
+            nombreapellido,
+            correo,
+            institucion,
+            mensaje,
+        }                
+        const respuesta = await Axios.post('/contactos/crear', contacto);
+        const aviso = respuesta.data.mensaje
+        Swal.fire({
+            icon: 'success',
+            title: aviso,
+            showConfirmButton: false,
+            timer: 3000
+            })
+            setTimeout(()=>{
+                window.location.href='/'
+            },3000)
+        };
+    
     return (
         <ThemeProvider theme={theme}>        
         <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
@@ -31,30 +53,24 @@ export default function Contactenos(props) {
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                
-            }}>
-            
+            }}>            
             <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
                 <ContactMailIcon/>
             </Avatar>
             <Typography component="h1" variant="h4" align="center">
                 Contáctenos
                 <br/>
-                <Typography variant="subtitle1" align="center">"Para nosotros es muy importante su opinión y estamos dispuesto a atender sus dudas y sugerencias"</Typography> 
-                
+                <Typography variant="subtitle1" align="center">"Para nosotros es muy importante su opinión y estamos dispuesto a atender sus dudas y sugerencias"</Typography>                
             </Typography>
             <br/>
-            <Box component="form" noValidate  sx={{ mt: 3 }}>
+            <Box component="form" noValidate onSubmit={guardar} sx={{ mt: 3 }}>
                 <Grid container spacing={3}>
-                    <Grid item xs={12} sm={6}>
-                    <TextField required id="nombres" label="Nombre(s)" type="text" fullWidth onChange={e => setNombres(e.target.value)} value={nombres}/>
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                    <TextField required id="apellidos" label="Apellido(s)" type="text" fullWidth onChange={e => setApellidos(e.target.value)} value={apellidos} />
+                    <Grid item xs={12}>
+                    <TextField required id="nombresapellidos" label="Nombre(s) y Apellido(s)" type="text" fullWidth onChange={e => setNombreApellido(e.target.value)} value={nombreapellido}/>
                     </Grid>
 
                     <Grid item xs={12}>
-                    <TextField  id="Institución" label="Institución" type="text" fullWidth onChange={e => setColegio(e.target.value)} value={colegio}/>
+                    <TextField  id="Institución" label="Institución" type="text" fullWidth onChange={e => setInstitucion(e.target.value)} value={institucion}/>
                     </Grid>
                                     
                     <Grid item xs={12}>
@@ -64,10 +80,8 @@ export default function Contactenos(props) {
                     <Grid item xs={12}>
                     <TextField  id="Mensaje" label="Mensaje" type="text" multiline rows={5} sx={{ width: 500 }} fullWidth onChange={e => setMensaje(e.target.value)} value={mensaje}/>
                     </Grid>
-                    
-                    
                 </Grid>
-                <Button endIcon={<SendIcon />} fullWidth variant="contained" sx={{ mt: 2, mb: 2 }} >Enviar</Button>
+                <Button type="submit" endIcon={<SendIcon />} fullWidth variant="contained" sx={{ mt: 2, mb: 2 }} >Enviar</Button>
             </Box>
             </Box>
         </Paper>        

@@ -49,7 +49,7 @@ export default function Resultados() {
 	//const [preguntasafirmativas, setPreguntasAfirmativas] = useState('')
     
     useEffect( ()=>{
-        listarResultados()        
+        listarResultados()
     },[] )
 
     const listarResultados=async()=>{

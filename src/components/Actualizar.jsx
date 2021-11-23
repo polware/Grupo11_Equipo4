@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect} from 'react'
 import CssBaseline from '@mui/material/CssBaseline';
 import Avatar from '@mui/material/Avatar';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -16,19 +16,41 @@ import Swal from 'sweetalert2'
 
 const theme = createTheme();
 
-export default function Actualizar(props) {
-    const [nombres,setNombres]=useState('')
-    const [apellidos,setApellidos]=useState('')
-    const [identificacion,setIdentificacion]=useState('')
-    const [contrasena,setContrasena]=useState('')
-    const [correo,setCorreo]=useState('')
-    const [fechanac,setFechanac]=useState('')
-    const [colegio,setColegio]=useState('')
-    const [ciudad,setCiudad]=useState('')
+export default function Actualizar() {
+    const [nombres, setNombres]=useState('')
+    const [apellidos, setApellidos]=useState('')
+    const [identificacion, setIdentificacion]=useState('')
+    const [contrasena, setContrasena]=useState('')
+    const [correo, setCorreo]=useState('')
+    const [fechanac, setFechanac]=useState('')
+    const [colegio, setColegio]=useState('')
+    const [ciudad, setCiudad]=useState('')
+
+    useEffect( ()=>{
+        listarEstudiante()
+    },[] )
+
+    const listarEstudiante=async()=>{
+        const id = sessionStorage.getItem('idusuario')
+        const token = sessionStorage.getItem('token')
+        const respuesta = await Axios.get('/estudiante/listarID/'+id,
+        {
+          headers:{'autorizacion':token}
+        })
+        console.log(respuesta.data)
+        setNombres(respuesta.data.nombres)
+        setApellidos(respuesta.data.apellidos)
+        setIdentificacion(respuesta.data.identificacion)
+        setContrasena(respuesta.data.contrasena)
+        setCorreo(respuesta.data.correo)
+        setFechanac(respuesta.data.fechanac)
+        setColegio(respuesta.data.colegio)
+        setCiudad(respuesta.data.ciudad)
+    }
 
     const actualizar= async(e)=>{
         e.preventDefault();
-        const id=props.match.params.id
+        const id = sessionStorage.getItem('idusuario')
         const token= sessionStorage.getItem('token')
         const student={
             nombres,
@@ -43,16 +65,16 @@ export default function Actualizar(props) {
         const respuesta= await Axios.put('/estudiante/actualizar/'+id, student,{
             headers:{'autorizacion':token}
         })
-        const mensaje=respuesta.data.mensaje        
+        const mensaje=respuesta.data.mensaje
         Swal.fire({              
             icon: 'success',
             title: mensaje,
             showConfirmButton: false,
-            timer: 1500
+            timer: 2500
               })
             setTimeout(()=>{
                 window.location.href='/'
-             },1500)
+             },2500)
     }
 
     return (
@@ -85,7 +107,7 @@ export default function Actualizar(props) {
                     <TextField disabled id="identificacion" label="Identificación" fullWidth onChange={e => setIdentificacion(e.target.value)} value={identificacion}/>
                     </Grid>
                     <Grid item xs={12}>
-                    <TextField required id="contrasena" label="Contraseña" type="password" fullWidth onChange={e => setContrasena(e.target.value)} value={contrasena}/>
+                    <TextField disabled id="contrasena" label="Contraseña" type="password" fullWidth onChange={e => setContrasena(e.target.value)} value={contrasena}/>
                     </Grid>
                     <Grid item xs={12}>
                     <TextField required id="correo" label="Correo Electrónico" type="email" fullWidth onChange={e => setCorreo(e.target.value)} value={correo}/>
