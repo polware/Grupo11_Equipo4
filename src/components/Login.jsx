@@ -42,13 +42,15 @@ export default function Login() {
             sessionStorage.setItem('idusuario',idusuario)
             Swal.fire({              
                 icon: 'success',
-                title: mensaje,
+                title: mensaje  + '\n' + sessionStorage.getItem('nombre'),
                 showConfirmButton: false,
-                timer: 4000
+                timer: 2000
                 })
-            window.location.href='/Admin'
-            }
-    }
+            setTimeout(()=>{
+                window.location.href='/Admin'
+            },1500)            
+        }
+}
 
     return (
         <ThemeProvider theme={theme}>

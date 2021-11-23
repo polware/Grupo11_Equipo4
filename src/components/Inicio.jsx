@@ -57,11 +57,13 @@ function Inicio() {
           sessionStorage.setItem('idusuario',idusuario)
           Swal.fire({              
               icon: 'success',
-              title: mensaje,
+              title: mensaje + '\n' + sessionStorage.getItem('nombre'),
               showConfirmButton: false,
-              timer: 4000
+              timer: 2000
               })
-          window.location.href='/Test'
+          setTimeout(()=>{
+              window.location.href='/Test'
+            },1500)
           }      
   }  
 

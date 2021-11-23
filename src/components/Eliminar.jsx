@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect} from 'react'
 import CssBaseline from '@mui/material/CssBaseline';
 import Avatar from '@mui/material/Avatar';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -25,21 +25,46 @@ export default function Eliminar() {
     const [fechanac,setFechanac]=useState('')
     const [colegio,setColegio]=useState('')
     const [ciudad,setCiudad]=useState('')
+    
+    useEffect( ()=>{
+        listarEstudiante()
+    },[] )
 
-    const borrar= async(id)=>{
-    const token= sessionStorage.getItem('token')
-    const respuesta= await Axios.delete('/estudiante/eliminar/'+id,{
-            headers:{'autorizacion':token}
+    const listarEstudiante=async()=>{
+        const id = sessionStorage.getItem('idusuario')
+        const token = sessionStorage.getItem('token')
+        const respuesta = await Axios.get('/estudiante/listarID/'+id,
+        {
+          headers:{'autorizacion':token}
         })
-    const mensaje=respuesta.data.mensaje
-    Swal.fire({              
+        console.log(respuesta.data)
+        setNombres(respuesta.data.nombres)
+        setApellidos(respuesta.data.apellidos)
+        setIdentificacion(respuesta.data.identificacion)
+        setContrasena(respuesta.data.contrasena)
+        setCorreo(respuesta.data.correo)
+        setFechanac(respuesta.data.fechanac)
+        setColegio(respuesta.data.colegio)
+        setCiudad(respuesta.data.ciudad)
+    }
+
+    const borrar= async()=>{
+        const id = sessionStorage.getItem('idusuario')
+        const token= sessionStorage.getItem('token')
+        sessionStorage.clear()
+        const respuesta = await Axios.delete('/estudiante/eliminar/'+id,{
+                headers:{'autorizacion':token}
+            })        
+        setTimeout(()=>{
+        const mensaje=respuesta.data.mensaje
+        Swal.fire({              
             icon: 'error',
             title: mensaje,
             showConfirmButton: false,
-            timer: 1500
-              })
-
-            //obtenerEmpleados()
+            timer: 2000
+            })
+        window.location.href='/'
+        },2000)
     }
     
     return (
@@ -63,28 +88,28 @@ export default function Eliminar() {
             <Box component="form" noValidate sx={{ mt: 3 }}>
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={6}>
-                    <TextField required id="nombres" label="Nombre(s)" type="text" fullWidth onChange={e => setNombres(e.target.value)} value={nombres}/>
+                    <TextField disabled id="nombres" label="Nombre(s)" type="text" fullWidth value={nombres}/>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                    <TextField required id="apellidos" label="Apellido(s)" type="text" fullWidth onChange={e => setApellidos(e.target.value)} value={apellidos}/>
+                    <TextField disabled id="apellidos" label="Apellido(s)" type="text" fullWidth value={apellidos}/>
                     </Grid>
                     <Grid item xs={12}>
-                    <TextField disabled id="identificacion" label="Identificación" fullWidth onChange={e => setIdentificacion(e.target.value)} value={identificacion}/>
+                    <TextField disabled id="identificacion" label="Identificación" fullWidth value={identificacion}/>
                     </Grid>
                     <Grid item xs={12}>
-                    <TextField required id="contrasena" label="Contraseña" type="password" fullWidth onChange={e => setContrasena(e.target.value)} value={contrasena}/>
+                    <TextField disabled id="contrasena" label="Contraseña" type="password" fullWidth value={contrasena}/>
                     </Grid>
                     <Grid item xs={12}>
-                    <TextField required id="correo" label="Correo Electrónico" type="email" fullWidth onChange={e => setCorreo(e.target.value)} value={correo}/>
+                    <TextField disabled id="correo" label="Correo Electrónico" type="email" fullWidth value={correo}/>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                    <TextField required id="ciudad" label="Ciudad" type="text" fullWidth onChange={e => setCiudad(e.target.value)} value={ciudad}/>
+                    <TextField disabled id="ciudad" label="Ciudad" type="text" fullWidth value={ciudad}/>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                    <TextField required id="fechanac" label="Fecha Nacimiento" type="date" fullWidth onChange={e => setFechanac(e.target.value)} value={fechanac}/>
+                    <TextField disabled id="fechanac" label="Fecha Nacimiento" type="date" fullWidth value={fechanac}/>
                     </Grid>
                     <Grid item xs={12}>
-                    <TextField required id="colegio" label="Colegio" type="text" fullWidth onChange={e => setColegio(e.target.value)} value={colegio}/>
+                    <TextField disabled id="colegio" label="Colegio" type="text" fullWidth value={colegio}/>
                     </Grid>                
                 </Grid>
                 <Button type="submit" fullWidth variant="contained" startIcon={<DeleteForeverIcon/>} sx={{ mt: 3, mb: 2 }} onClick={()=>borrar()} color="error">Eliminar</Button>
@@ -95,4 +120,3 @@ export default function Eliminar() {
         </ThemeProvider>
     );
 }
-
