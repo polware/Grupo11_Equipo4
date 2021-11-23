@@ -12,7 +12,7 @@ contactoControl.crearContacto = async(req,res)=>{
 
     const respuesta= await nuevoContacto.save()
     res.json({
-        mensaje:'Formulario de Contacto guardado',
+        mensaje:'Sus datos se han guardado con éxito.\nPronto lo contactaremos',
         respuesta
     })
 }

@@ -42,8 +42,8 @@ estudianteControl.login = async(req, res) => {
         const token = jwt.sign({_id:Estudiante._id }, 'Student');
         res.json({
             mensaje: 'Bienvenido',
-            //id:Estudiante._id,
-            id:Estudiante.identificacion,
+            id:Estudiante._id,
+            //id:Estudiante.identificacion,
             identificacion:Estudiante.identificacion,
             nombre:Estudiante.nombres,
             token
@@ -79,7 +79,7 @@ estudianteControl.eliminar = async(req,res) => {
     const id = req.params.id;
     await estudiante.findByIdAndRemove({_id:id});
     res.json({
-        mensaje:'Estudiante eliminado'
+        mensaje:'Su cuenta ha sido eliminada'
     })
 }
 
@@ -91,11 +91,11 @@ estudianteControl.actualizarAdmin = async(req,res) => {
     })
 }
 
-estudianteControl.actualizarEstudiante = async(req,res) => {
+estudianteControl.actualizar = async(req,res) => {
     const id = req.params.id;
     await estudiante.findByIdAndUpdate({_id:id}, req.body)
     res.json({
-        mensaje:'Estudiante actualizado'
+        mensaje:'Datos del estudiante actualizados'
     })
 }
 

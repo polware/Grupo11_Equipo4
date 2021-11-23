@@ -5,6 +5,6 @@ const Auth = require('../helper/auth.admin')
 
 router.post('/crear', contacController.crearContacto);
 router.get('/listar', Auth.verificarToken, contacController.listar);
-router.get('/eliminar', Auth.verificarToken, contacController.eliminar);
+router.delete('/eliminar/:id', Auth.verificarToken, contacController.eliminar);
 
 module.exports = router;
