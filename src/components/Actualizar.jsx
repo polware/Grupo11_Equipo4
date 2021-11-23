@@ -11,6 +11,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import SaveIcon from '@mui/icons-material/Save';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Axios from 'axios'
 import Swal from 'sweetalert2'
 
@@ -30,6 +31,10 @@ export default function Actualizar() {
         listarEstudiante()
     },[] )
 
+    const volver=()=>{
+        window.location.href="/Profile"    
+      }
+    
     const listarEstudiante=async()=>{
         const id = sessionStorage.getItem('idusuario')
         const token = sessionStorage.getItem('token')
@@ -73,7 +78,7 @@ export default function Actualizar() {
             timer: 2500
               })
             setTimeout(()=>{
-                window.location.href='/'
+                window.location.href='/Profile'
              },2500)
     }
 
@@ -122,7 +127,8 @@ export default function Actualizar() {
                     <TextField required id="colegio" label="Colegio" type="text" fullWidth onChange={e => setColegio(e.target.value)} value={colegio}/>
                     </Grid>                
                 </Grid>
-                <Button type="submit" fullWidth variant="contained" startIcon={<SaveIcon/>} sx={{ mt: 3, mb: 2 }} color="success">Actualizar</Button>
+                <Button type="submit" variant="contained" startIcon={<SaveIcon/>} sx={{ mt: 3, mb: 2, ml: 14 }} color="success">Actualizar</Button>&nbsp;
+                <Button type="submit" variant="contained" startIcon={<ArrowBackIcon/>} sx={{ mt: 3, mb: 2 }} onClick={()=>volver()}>Volver</Button>
             </Box>
             </Box>
         </Paper>

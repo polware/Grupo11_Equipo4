@@ -11,12 +11,19 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useHistory } from "react-router-dom";
 import Axios from 'axios'
 import Swal from 'sweetalert2'
+import { confirmAlert } from 'react-confirm-alert';
+import "../confirm-alert.css"
 
 const theme = createTheme();
 
 export default function Eliminar() {
+    const history = useHistory();
+    const navigateTo = () => history.push('/Profile')
+
     const [nombres,setNombres]=useState('')
     const [apellidos,setApellidos]=useState('')
     const [identificacion,setIdentificacion]=useState('')
@@ -26,6 +33,27 @@ export default function Eliminar() {
     const [colegio,setColegio]=useState('')
     const [ciudad,setCiudad]=useState('')
     
+    const confirmarborrar = async() => {
+        confirmAlert({
+          title: 'Por favor confirme:',
+          message: '¿Está seguro de borrar su registro?',
+          buttons: [
+            {
+              label: 'Si',
+              onClick: () => borrar()
+            },
+            {
+              label: 'No',
+              onClick: () => {}
+            }
+          ],
+          closeOnEscape: true,
+          afterClose: () => {},
+          onClickOutside: () => {},
+          onKeypressEscape: () => {},
+        });
+      };
+
     useEffect( ()=>{
         listarEstudiante()
     },[] )
@@ -55,16 +83,16 @@ export default function Eliminar() {
         const respuesta = await Axios.delete('/estudiante/eliminar/'+id,{
                 headers:{'autorizacion':token}
             })        
-        setTimeout(()=>{
         const mensaje=respuesta.data.mensaje
+        //setTimeout(()=>{
         Swal.fire({              
             icon: 'error',
             title: mensaje,
             showConfirmButton: false,
-            timer: 2000
+            timer: 3500
             })
         window.location.href='/'
-        },2000)
+        //},3000)
     }
     
     return (
@@ -112,7 +140,8 @@ export default function Eliminar() {
                     <TextField disabled id="colegio" label="Colegio" type="text" fullWidth value={colegio}/>
                     </Grid>                
                 </Grid>
-                <Button type="submit" fullWidth variant="contained" startIcon={<DeleteForeverIcon/>} sx={{ mt: 3, mb: 2 }} onClick={()=>borrar()} color="error">Eliminar</Button>
+                <Button variant="contained" startIcon={<DeleteForeverIcon/>} sx={{ mt: 3, mb: 2, ml: 16 }} onClick={()=>confirmarborrar()} color="error">Eliminar</Button>&nbsp;
+                <Button type="submit" variant="contained" startIcon={<ArrowBackIcon/>} sx={{ mt: 3, mb: 2 }} onClick={navigateTo}>Volver</Button>
             </Box>
             </Box>
         </Paper>        

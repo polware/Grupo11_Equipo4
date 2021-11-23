@@ -50,8 +50,8 @@ export default function Registrarse() {
           identificacion,
           contrasena,
           correo,
-      }        
-      const respuesta=await Axios.post('/estudiante/crear', student);
+      }
+      const respuesta = await Axios.post('/estudiante/crear', student);
       const mensaje= respuesta.data.mensaje
       Swal.fire({
           icon: 'success',

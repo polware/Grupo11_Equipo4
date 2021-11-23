@@ -21,17 +21,20 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Link } from 'react-router-dom'
+import { confirmAlert } from 'react-confirm-alert';
+//import 'react-confirm-alert/src/react-confirm-alert.css';
+import "../confirm-alert.css"
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-      backgroundColor: theme.palette.common.black,
+      backgroundColor: '#6E6C6C',
       color: theme.palette.common.white,
     },
     [`&.${tableCellClasses.body}`]: {
-      fontSize: 14,
+      fontSize: theme.typography.pxToRem(15),
     },
 }));
-  
+
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
     '&:nth-of-type(odd)': {
       backgroundColor: theme.palette.action.hover,
@@ -88,6 +91,69 @@ export default function Admin() {
         listarContactos()
     },[] )
 
+    const confirmdelest = async(id) => {
+      confirmAlert({
+        title: 'Por favor confirme:',
+        message: '¿Está seguro de borrar el registro?',
+        buttons: [
+          {
+            label: 'Si',
+            onClick: () => eliminarest(id)
+          },
+          {
+            label: 'No',
+            onClick: () => {}
+          }
+        ],
+        closeOnEscape: true,
+        afterClose: () => {},
+        onClickOutside: () => {},
+        onKeypressEscape: () => {},
+      });
+    };
+
+    const confirmdelres = async(id) => {
+      confirmAlert({
+        title: 'Por favor confirme:',
+        message: '¿Está seguro de borrar el registro?',
+        buttons: [
+          {
+            label: 'Si',
+            onClick: () => eliminarresult(id)
+          },
+          {
+            label: 'No',
+            onClick: () => {}
+          }
+        ],
+        closeOnEscape: true,
+        afterClose: () => {},
+        onClickOutside: () => {},
+        onKeypressEscape: () => {},
+      });
+    };
+
+    const confirmdelcont = async(id) => {
+      confirmAlert({
+        title: 'Por favor confirme:',
+        message: '¿Está seguro de borrar el registro?',
+        buttons: [
+          {
+            label: 'Si',
+            onClick: () => eliminarcontac(id)
+          },
+          {
+            label: 'No',
+            onClick: () => {}
+          }
+        ],
+        closeOnEscape: true,
+        afterClose: () => {},
+        onClickOutside: () => {},
+        onKeypressEscape: () => {},
+      });
+    };
+
     const listaEstudiantes=async()=>{
         const token = sessionStorage.getItem('token')
         const respuesta1 = await Axios.get('/estudiante/listar/',
@@ -128,7 +194,7 @@ export default function Admin() {
           icon: 'error',
           title: mensaje,
           showConfirmButton: false,
-          timer: 1500
+          timer: 2000
           })
           listaEstudiantes()
     }
@@ -143,7 +209,7 @@ export default function Admin() {
           icon: 'error',
           title: mensaje,
           showConfirmButton: false,
-          timer: 1500
+          timer: 2000
           })
           listarResultados()
     }
@@ -158,7 +224,7 @@ export default function Admin() {
           icon: 'error',
           title: mensaje,
           showConfirmButton: false,
-          timer: 1500
+          timer: 2000
           })
           listarContactos()
     }
@@ -187,7 +253,7 @@ export default function Admin() {
             </Box>
             <Box sx={{ bgcolor: '#E1E1DF', width: '100%' }}>
             <hr/>
-            <Tabs value={value} onChange={handleChange} textColor="primary" centered indicatorColor="primary" variant="fullWidth" aria-label="full width tabs example">
+            <Tabs value={value} onChange={handleChange} centered indicatorColor="primary" textColor="inherit" variant="fullWidth" aria-label="full width tabs example">
             <Tab label="Tabla Estudiantes" {...a11yProps(0)} />                
             <Tab label="Tabla Resultados" {...a11yProps(1)} />
             <Tab label="Tabla Contáctenos" {...a11yProps(2)} />
@@ -224,7 +290,7 @@ export default function Admin() {
                             <StyledTableCell align="center">{estudiante.ciudad}</StyledTableCell>
                             <StyledTableCell align="center">
                               <Link className='btn btn-warning' to={'/editar/'+estudiante._id}>Editar</Link>
-                              <Button type="submit" variant="contained" sx={{ mt: 1, mb: 1 }} onClick={()=>eliminarest(estudiante._id)} color="error">Eliminar</Button>
+                              <Button variant="contained" sx={{ mt: 1, mb: 1 }} onClick={()=>confirmdelest(estudiante._id)} color="error">Eliminar</Button>
                             </StyledTableCell>
                             </StyledTableRow>
                         ))}
@@ -259,7 +325,7 @@ export default function Admin() {
                             <StyledTableCell align="center">{resultado.letraaptitudes}</StyledTableCell>
                             <StyledTableCell align="center">{resultado.ramaaptitudes}</StyledTableCell>
                             <StyledTableCell align="center">
-                            <Button type="submit" variant="contained" sx={{ mt: 1, mb: 1 }} onClick={()=>eliminarresult(resultado._id)} color="error">Eliminar</Button>
+                            <Button variant="contained" sx={{ mt: 1, mb: 1 }} onClick={()=>confirmdelres(resultado._id)} color="error">Eliminar</Button>
                             </StyledTableCell>
                             </StyledTableRow>
                         ))}
@@ -290,7 +356,7 @@ export default function Admin() {
                             <StyledTableCell align="center">{contacto.institucion}</StyledTableCell>
                             <StyledTableCell align="center">{contacto.mensaje}</StyledTableCell>
                             <StyledTableCell align="center">
-                            <Button type="submit" variant="contained" sx={{ mt: 1, mb: 1 }} onClick={()=>eliminarcontac(contacto._id)} color="error">Eliminar</Button>
+                            <Button variant="contained" sx={{ mt: 1, mb: 1 }} onClick={()=>confirmdelcont(contacto._id)} color="error">Eliminar</Button>
                             </StyledTableCell>
                             </StyledTableRow>
                         ))}

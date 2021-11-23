@@ -13,6 +13,7 @@ import Test from './components/Test';
 import Resultados from './components/Resultados';
 import Login from './components/Login';
 import Admin from './components/Admin';
+import Profile from './components/Profile';
 import Eliminar from './components/Eliminar';
 import Editstudent from './components/Editstudent';
 import NotFound from './components/NotFound';
@@ -56,6 +57,11 @@ const authRequiredRoutes = [
     path: '/Admin',
     exact: true,
     component: <Admin/>
+  },
+  {
+    path: '/Profile',
+    exact: true,
+    component: <Profile/>
   },
   {
       path: '/editar/:id',

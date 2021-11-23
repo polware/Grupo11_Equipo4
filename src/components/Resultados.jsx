@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import { styled } from '@mui/material/styles';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
@@ -51,6 +52,10 @@ export default function Resultados() {
     useEffect( ()=>{
         listarResultados()
     },[] )
+
+    const volver=()=>{
+      window.location.href="/Profile"    
+    }
 
     const listarResultados=async()=>{
         const id = sessionStorage.getItem('idusuario')
@@ -117,6 +122,7 @@ export default function Resultados() {
                   </TableContainer>
                   <br/>
                   <img src="/img/Tabla_Chaside.jpg" alt="Tabla Chaside" width="680" height="300"></img>
+                  <Button type="submit" variant="contained" startIcon={<ArrowBackIcon/>} sx={{ mt: 3, mb: 2 }} onClick={()=>volver()}>Volver</Button>
             </Box>
           </Paper>
         </Container>

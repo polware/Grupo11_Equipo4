@@ -62,7 +62,7 @@ function Inicio() {
               timer: 2000
               })
           setTimeout(()=>{
-              window.location.href='/Test'
+              window.location.href='/Profile'
             },1500)
           }      
   }  
