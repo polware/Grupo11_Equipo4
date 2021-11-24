@@ -20,10 +20,28 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Link } from 'react-router-dom'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import CancelPresentationIcon from '@mui/icons-material/CancelPresentation';
+import SaveIcon from '@mui/icons-material/Save';
+import TextField from '@mui/material/TextField';
+import Grid from '@mui/material/Grid';
+import Modal from '@mui/material/Modal';
 import { confirmAlert } from 'react-confirm-alert';
-//import 'react-confirm-alert/src/react-confirm-alert.css';
 import "../confirm-alert.css"
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  pt: 2,
+  px: 4,
+  pb: 3,
+};
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -84,6 +102,24 @@ export default function Admin() {
     const[estudiantes, setEstudiantes] = useState([])
     const[contactos, setContactos] = useState([])
     const[resultados, setResultados] = useState([])
+
+    const [idEstudiante,setIdEstudiante]=useState('')
+    const [nombres, setNombres] = useState('')
+    const [apellidos, setApellidos] = useState('')
+    const [identificacion, setIdentificacion] = useState('')
+    const [contrasena, setContrasena] = useState('')
+    const [correo, setCorreo] = useState('')
+    const [fechanac, setFechanac] = useState('')
+    const [colegio, setColegio] = useState('')
+    const [ciudad, setCiudad] = useState('')
+
+    const [open, setOpen] = React.useState(false);
+    //const handleOpen = () => {
+    //  setOpen(true);
+    //};
+    const handleClose = () => {
+      setOpen(false);
+    };
 
     useEffect( ()=>{
         listaEstudiantes()
@@ -153,6 +189,53 @@ export default function Admin() {
         onKeypressEscape: () => {},
       });
     };
+
+    const obtenerEstudiante = async(idParametro)=>{
+      setOpen(true)
+      const id = idParametro
+      const token = sessionStorage.getItem('token')
+      const respuesta = await Axios.get('/estudiante/listarIDAdmin/'+id,{
+        headers:{'autorizacion':token}
+      })  
+      console.log(respuesta.data)
+      setIdEstudiante(respuesta.data._id)
+      setNombres(respuesta.data.nombres)
+      setApellidos(respuesta.data.apellidos)
+      setIdentificacion(respuesta.data.identificacion)
+      setContrasena(respuesta.data.contrasena)
+      setCorreo(respuesta.data.correo)
+      setFechanac(respuesta.data.fechanac)
+      setColegio(respuesta.data.colegio)
+      setCiudad(respuesta.data.ciudad)  
+    }
+
+    const actualizar = async(e)=>{
+      e.preventDefault();
+      const id = idEstudiante
+      const token = sessionStorage.getItem('token')
+      const estudiante={
+          nombres,
+          apellidos,
+          identificacion,
+          contrasena,
+          correo,
+          fechanac,
+          colegio,
+          ciudad
+      }
+      const respuesta= await Axios.put('/estudiante/actualizarAdmin/'+id,estudiante,{
+          headers:{'autorizacion':token}
+      })
+      const mensaje=respuesta.data.mensaje
+      listaEstudiantes()
+      Swal.fire({              
+          icon: 'success',
+          title: mensaje,
+          showConfirmButton: false,
+          timer: 1500
+          })
+      setOpen(false)
+  }
 
     const listaEstudiantes=async()=>{
         const token = sessionStorage.getItem('token')
@@ -289,7 +372,7 @@ export default function Admin() {
                             <StyledTableCell align="center">{estudiante.colegio}</StyledTableCell>
                             <StyledTableCell align="center">{estudiante.ciudad}</StyledTableCell>
                             <StyledTableCell align="center">
-                              <Link className='btn btn-warning' to={'/editar/'+estudiante._id}>Editar</Link>
+                              <Button variant="contained" sx={{ mt: 1, mb: 1 }} onClick={()=>obtenerEstudiante(estudiante._id)} color="warning">Editar</Button>
                               <Button variant="contained" sx={{ mt: 1, mb: 1 }} onClick={()=>confirmdelest(estudiante._id)} color="error">Eliminar</Button>
                             </StyledTableCell>
                             </StyledTableRow>
@@ -297,6 +380,51 @@ export default function Admin() {
                         </TableBody>
                     </Table>
                   </TableContainer>
+
+                  <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="parent-modal-title"
+                    aria-describedby="parent-modal-description"
+                  >
+                    <Box sx={{ ...style, width: 800, }}>
+                    <Avatar sx={{ m: 1, bgcolor: 'warning.main', ml: 42 }}>
+                      <AccountCircleIcon/>
+                    </Avatar>
+                      <Typography id="modal-modal-title" variant="h4" component="h1" align="center" color="orange">
+                        Editar Estudiante
+                      </Typography>
+                      <hr/>
+                      <Grid container spacing={3}>
+                          <Grid item xs={12} sm={6}>
+                          <TextField required id="nombres" label="Nombre(s)" type="text" fullWidth onChange={e => setNombres(e.target.value)} value={nombres}/>
+                          </Grid>
+                          <Grid item xs={12} sm={6}>
+                          <TextField required id="apellidos" label="Apellido(s)" type="text" fullWidth onChange={e => setApellidos(e.target.value)} value={apellidos}/>
+                          </Grid>
+                          <Grid item xs={12}>
+                          <TextField disabled id="identificacion" label="Identificación" fullWidth onChange={e => setIdentificacion(e.target.value)} value={identificacion}/>
+                          </Grid>
+                          <Grid item xs={12}>
+                          <TextField disabled id="contrasena" label="Contraseña" type="password" fullWidth onChange={e => setContrasena(e.target.value)} value={contrasena}/>
+                          </Grid>
+                          <Grid item xs={12}>
+                          <TextField required id="correo" label="Correo Electrónico" type="email" fullWidth onChange={e => setCorreo(e.target.value)} value={correo}/>
+                          </Grid>
+                          <Grid item xs={12} sm={6}>
+                          <TextField required id="ciudad" label="Ciudad" type="text" fullWidth onChange={e => setCiudad(e.target.value)} value={ciudad}/>
+                          </Grid>
+                          <Grid item xs={12} sm={6}>
+                          <TextField required id="fechanac" label="Fecha Nacimiento" type="date" fullWidth onChange={e => setFechanac(e.target.value)} value={fechanac}/>
+                          </Grid>
+                          <Grid item xs={12}>
+                          <TextField required id="colegio" label="Colegio" type="text" fullWidth onChange={e => setColegio(e.target.value)} value={colegio}/>
+                          </Grid>                
+                      </Grid>
+                      <Button variant="contained" startIcon={<SaveIcon/>} sx={{ mt: 3, mb: 2, ml: 30 }} color="success" onClick={actualizar}>Guardar</Button>&nbsp;
+                      <Button variant="contained" startIcon={<CancelPresentationIcon/>} onClick={handleClose} sx={{ mt: 3, mb: 2 }} color="info">Cerrar</Button>
+                    </Box>
+                  </Modal>
             </TabPanel>
             
             <TabPanel value={value} index={1}>

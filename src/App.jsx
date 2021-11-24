@@ -15,7 +15,6 @@ import Login from './components/Login';
 import Admin from './components/Admin';
 import Profile from './components/Profile';
 import Eliminar from './components/Eliminar';
-import Editstudent from './components/Editstudent';
 import NotFound from './components/NotFound';
 import AuthRequired from "./AuthRequired"
 
@@ -62,11 +61,6 @@ const authRequiredRoutes = [
     path: '/Profile',
     exact: true,
     component: <Profile/>
-  },
-  {
-      path: '/editar/:id',
-      exact: true,
-      component: <Editstudent/>
   },
   {
     path: '/Test',
@@ -120,8 +114,11 @@ function App() {
                           key={index}
                           exact={route.exact}
                           path={route.path}
-                          render={() => (
-                          <AuthRequired orComponent={route.component} />
+                          render={(props) => (
+                            <AuthRequired 
+                                {...props}
+                                orComponent={route.component}
+                            />
                           )}
                         />
                     ))
