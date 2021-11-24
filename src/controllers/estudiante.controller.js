@@ -12,10 +12,10 @@ estudianteControl.crear = async(req,res) => {
         contrasena,
         correo
     })
-    const identEstudiante = await estudiante.findOne({identificacion:identificacion});
-    if(identEstudiante){
+    const verificar = await estudiante.findOne({identificacion:identificacion});
+    if(verificar){
         res.json({
-            mensaje:'El No. identificación ya existe'
+            mensaje:'ERROR'
         })
     }
     else {
@@ -43,8 +43,6 @@ estudianteControl.login = async(req, res) => {
         res.json({
             mensaje: 'Bienvenido',
             id:Estudiante._id,
-            //id:Estudiante.identificacion,
-            identificacion:Estudiante.identificacion,
             nombre:Estudiante.nombres,
             token
         })
