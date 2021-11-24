@@ -421,7 +421,7 @@ export default function Admin() {
                           <TextField required id="colegio" label="Colegio" type="text" fullWidth onChange={e => setColegio(e.target.value)} value={colegio}/>
                           </Grid>                
                       </Grid>
-                      <Button variant="contained" startIcon={<SaveIcon/>} sx={{ mt: 3, mb: 2, ml: 30 }} color="success" onClick={actualizar}>Guardar</Button>&nbsp;
+                      <Button variant="contained" startIcon={<SaveIcon/>} sx={{ mt: 3, mb: 2, ml: 30 }} color="warning" onClick={actualizar}>Guardar</Button>&nbsp;
                       <Button variant="contained" startIcon={<CancelPresentationIcon/>} onClick={handleClose} sx={{ mt: 3, mb: 2 }} color="info">Cerrar</Button>
                     </Box>
                   </Modal>

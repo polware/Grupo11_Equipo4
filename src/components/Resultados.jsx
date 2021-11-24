@@ -47,7 +47,7 @@ export default function Resultados() {
     const [letraaptitudes, setLetraaptitudes] = useState('')
     const [ramaintereses, setRamaintereses] = useState('')
     const [ramaaptitudes, setRamaaptitudes] = useState('')
-	//const [preguntasafirmativas, setPreguntasAfirmativas] = useState('')
+	  //const [preguntasafirmativas, setPreguntasAfirmativas] = useState('')
     
     useEffect( ()=>{
         listarResultados()
@@ -56,11 +56,18 @@ export default function Resultados() {
     const volver=()=>{
       window.location.href="/Profile"    
     }
-
+    
     const listarResultados=async()=>{
         const id = sessionStorage.getItem('idusuario')
         const token = sessionStorage.getItem('token')
-        const respuesta = await Axios.get('/resultados/listarID/'+id,
+        
+        const numidentidad = await Axios.get('/estudiante/listarID/'+id,
+        {
+          headers:{'autorizacion':token}
+        })
+        console.log(numidentidad.data)
+        const aux = (numidentidad.data.identificacion)
+        const respuesta = await Axios.get('/resultados/buscarID/'+aux,
         {
           headers:{'autorizacion':token}
         })

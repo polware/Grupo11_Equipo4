@@ -3,18 +3,19 @@ import './App.css';
 import { BrowserRouter as Router, Switch, Route, } from "react-router-dom";
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import Registrarse from './components/Registrarse';
 import Inicio from './components/Inicio';
+import Registrarse from './components/Registrarse';
 import Recuperar from './components/Recuperar';
 import Quienessomos from './components/Quienessomos';
 import Contactenos from './components/Contactenos';
+import Profile from './components/Profile';
 import Actualizar from './components/Actualizar';
+import Eliminar from './components/Eliminar';
 import Test from './components/Test';
 import Resultados from './components/Resultados';
 import Login from './components/Login';
+import Registroadm1n from './components/Registroadm1n';
 import Admin from './components/Admin';
-import Profile from './components/Profile';
-import Eliminar from './components/Eliminar';
 import NotFound from './components/NotFound';
 import AuthRequired from "./AuthRequired"
 
@@ -48,6 +49,11 @@ const publicRoutes = [
     path: "/Registrarse",
     exact: true,
     component: Registrarse
+  },
+  {
+    path: "/Registroadm1n",
+    exact: true,
+    component: Registroadm1n
   },
 ];
 
