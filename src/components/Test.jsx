@@ -1,4 +1,5 @@
 import React from 'react'
+import { useHistory } from "react-router-dom";
 import CssBaseline from '@mui/material/CssBaseline';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -10,6 +11,7 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
+import ChromeReaderModeIcon from '@mui/icons-material/ChromeReaderMode';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Introtest from './Introtest';
@@ -43,6 +45,10 @@ function getStepContent(step) {
 const theme = createTheme();
 
 export default function Test() {
+
+    const history = useHistory();
+    const ruta = () => history.push('/Resultados')
+
     const [activeStep, setActiveStep] = React.useState(0);
     const handleNext = () => {
         setActiveStep(activeStep + 1);
@@ -91,8 +97,9 @@ export default function Test() {
               {activeStep === steps.length ? (
                 <React.Fragment>
                   <Typography variant="h4" align="center" gutterBottom>
-                    Gracias por su tiempo.
+                    ¡Gracias por su tiempo!
                   </Typography>
+                  <Button variant="contained" startIcon={<ChromeReaderModeIcon/>} onClick={ruta} sx={{ mt: 3, mb: 2, ml: 39 }} color="info">Ver Resultado</Button>
                 </React.Fragment>
                 ) : (
                 <React.Fragment>
@@ -111,6 +118,8 @@ export default function Test() {
               )}
             </React.Fragment>
           </Paper>
+          <br />
+          <br />
         </Container>
     </ThemeProvider>
     )

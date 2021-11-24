@@ -42,7 +42,6 @@ export default function Registrarse() {
         ramaaptitudes,
         preguntasafirmativas,
       }
-      await Axios.post('/resultados/crear', resultados);
       
       const student={
           nombres,
@@ -53,7 +52,18 @@ export default function Registrarse() {
       }
       const respuesta = await Axios.post('/estudiante/crear', student);
       const mensaje= respuesta.data.mensaje
-      Swal.fire({
+      if(mensaje === 'ERROR') {
+          Swal.fire({
+            icon: 'error',
+            title: 'No. identificación ya está registrado',
+            showConfirmButton: false,
+            timer: 2000
+            })
+          document.getElementById('identificacion').value = ""
+      }
+      else {
+        await Axios.post('/resultados/crear', resultados);
+        Swal.fire({
           icon: 'success',
           title: mensaje,
           showConfirmButton: false,
@@ -62,7 +72,8 @@ export default function Registrarse() {
           setTimeout(()=>{
               window.location.href='/'
           },1500)
-      };
+      }      
+    };
 
       return (
         <ThemeProvider theme={theme}>
