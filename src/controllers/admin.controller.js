@@ -21,7 +21,7 @@ adminControl.crearAdmin = async(req,res) => {
         const token = jwt.sign({_id:nuevoAdmin._id}, 'Adm1n');
         await nuevoAdmin.save();
         res.json({
-            mensaje:'Bienvenido',
+            mensaje:'Cuenta Administrador Creada',
             id:nuevoAdmin._id,
             nombre:nuevoAdmin.nombre,
             token

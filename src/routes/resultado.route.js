@@ -9,5 +9,6 @@ router.get('/listar', Auth.verificarToken, resultadoController.listar);
 router.get('/listarID/:id', Authest.verificarToken, resultadoController.listarID);
 router.get('/listarIDadmin', Auth.verificarToken, resultadoController.listarIDadmin);
 router.delete('/eliminar/:id', Auth.verificarToken, resultadoController.eliminar);
+router.get('/buscarID/:identidad', Authest.verificarToken, resultadoController.buscarID);
 
 module.exports = router;

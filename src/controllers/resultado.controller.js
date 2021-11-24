@@ -24,22 +24,28 @@ resultadoControl.listar= async(req, res)=>{
     const respuesta = await resultado.find()
     res.json(respuesta)
 }
-/*
+
 resultadoControl.listarID = async(req,res) => {
     const id = req.params.id;
     const respuesta = await resultado.findOne({_id:id});
     res.json(respuesta)
 }
-*/
+/*
 resultadoControl.listarID = async(req,res) => {
     const id = req.params.id;
     const respuesta = await resultado.findOne({identidad:id});
     res.json(respuesta)
 }
-
+*/
 resultadoControl.listarIDadmin = async(req,res) => {
     const id = req.params.id;
     const respuesta = await resultado.findOne({_id:id});
+    res.json(respuesta)
+}
+
+resultadoControl.buscarID = async(req,res) => {
+    const identidad = req.params.identidad;
+    const respuesta = await resultado.findOne({identidad:identidad});
     res.json(respuesta)
 }
 

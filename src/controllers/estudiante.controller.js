@@ -61,6 +61,12 @@ estudianteControl.listar = async(req,res) => {
     res.json(respuesta)
 }
 
+estudianteControl.listarIDAdmin = async(req,res) => {
+    const id = req.params.id;
+    const respuesta = await estudiante.findOne({_id:id});
+    res.json(respuesta)
+}
+
 estudianteControl.listarID = async(req,res) => {
     const id = req.params.id;
     const respuesta = await estudiante.findOne({_id:id});
