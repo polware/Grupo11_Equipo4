@@ -30,6 +30,7 @@ resultadoControl.listarID = async(req,res) => {
     const respuesta = await resultado.findOne({_id:id});
     res.json(respuesta)
 }
+
 /*
 resultadoControl.listarID = async(req,res) => {
     const id = req.params.id;
@@ -54,6 +55,14 @@ resultadoControl.eliminar = async(req,res) => {
     await resultado.findByIdAndRemove({_id:id});
     res.json({
         mensaje:'Resultado eliminado'
+    })
+}
+
+resultadoControl.actualizar = async(req,res) => {
+    const id = req.params.id;
+    await resultado.findByIdAndUpdate({_id:id}, req.body)
+    res.json({
+        mensaje:'Registro limpiado'
     })
 }
 
