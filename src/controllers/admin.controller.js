@@ -13,7 +13,7 @@ adminControl.crearAdmin = async(req,res) => {
     const nickAdmin = await admin.findOne({username:username});
     if(nickAdmin){
         res.json({
-            mensaje:'El nombre de usuario ya existe'
+            mensaje:'yaexiste'
         })
     }
     else{
