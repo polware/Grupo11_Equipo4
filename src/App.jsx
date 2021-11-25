@@ -49,12 +49,7 @@ const publicRoutes = [
     path: "/Registrarse",
     exact: true,
     component: Registrarse
-  },
-  {
-    path: "/Registroadm1n",
-    exact: true,
-    component: Registroadm1n
-  },
+  },  
 ];
 
 const authRequiredRoutes = [
@@ -62,6 +57,11 @@ const authRequiredRoutes = [
     path: '/Admin',
     exact: true,
     component: <Admin/>
+  },
+  {
+    path: "/Registroadm1n",
+    exact: true,
+    component: <Registroadm1n/>
   },
   {
     path: '/Profile',

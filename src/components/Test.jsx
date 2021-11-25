@@ -61,7 +61,7 @@ export default function Test() {
         <ThemeProvider theme={theme}>
         <CssBaseline />
         <AppBar
-          position="absolute"
+          position="relative"
           color="default"
           elevation={0}
           sx={{

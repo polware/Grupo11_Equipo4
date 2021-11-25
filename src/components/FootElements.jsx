@@ -2,6 +2,10 @@ import styled from "styled-components";
 
 export const Foot = styled.nav`
     background: #0d6efd;
+    position:relative;
+    left:0;
+    bottom:0;
+    right:0;    
     color: #fff;
     height: 210px;
     display: flex;

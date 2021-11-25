@@ -27,16 +27,22 @@ export default function Registroadm1n() {
             username,
             contrasena,
         }
-        //const id = sessionStorage.getItem('idusuario')
-        //const token = sessionStorage.getItem('token')
-        /*
-        const respuesta = await Axios.post('/administrador/crear/'+id,
+        const token = sessionStorage.getItem('token')        
+        const respuesta = await Axios.post('/administrador/crear/', admin,
         {
           headers:{'autorizacion':token}
         })
-        */
-        const respuesta = await Axios.post('/administrador/crear', admin);
         const mensaje= respuesta.data.mensaje
+        if(mensaje === 'yaexiste') {
+          Swal.fire({
+            icon: 'error',
+            title: 'El nombre de usuario ya existe',
+            showConfirmButton: false,
+            timer: 2000
+            })
+          document.getElementById('username').value = ""
+      }
+      else { 
         Swal.fire({
             icon: 'success',
             title: mensaje,
@@ -44,9 +50,10 @@ export default function Registroadm1n() {
             timer: 1500
             })
             setTimeout(()=>{
-                window.location.href='/Login'
+                window.location.href='/Admin'
             },1500)
-        };
+      }
+    };
 
     return (
         <ThemeProvider theme={theme}>
@@ -63,7 +70,7 @@ export default function Registroadm1n() {
             <Avatar sx={{ m: 1, bgcolor: 'success.main' }}>
                 <LockOutlinedIcon/>
             </Avatar>
-            <Typography component="h1" variant="h5" color="green">Registrar Cuenta Administrador</Typography>
+            <Typography component="h2" variant="h4" color="green">Nueva Cuenta Administrador</Typography>
             <br />
             <Box component="form" noValidate onSubmit={guardar} sx={{ mt: 3 }}>
                 <Grid container spacing={2}>
@@ -77,10 +84,10 @@ export default function Registroadm1n() {
                     <TextField required fullWidth name="contrasena" label="Contraseña" type="password" id="contrasena" onChange={(e)=>setContrasena(e.target.value)}/>
                   </Grid>
                 </Grid>
-                <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }} color="success">Registrarse</Button>
+                <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }} color="success">Registrar</Button>
                 <Grid container justifyContent="flex-end">
                   <Grid item>
-                    <NavLink variant="body2" className="nav-link" to="/Login">¿Ya tiene una cuenta? Iniciar Sesión</NavLink>
+                    <NavLink variant="body2" className="nav-link" to="/Admin">Regresar a mi perfil Administrador</NavLink>
                   </Grid>
                 </Grid>
               </Box>

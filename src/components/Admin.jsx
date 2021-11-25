@@ -4,6 +4,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Swal from 'sweetalert2'
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
+import AddModeratorIcon from '@mui/icons-material/AddModerator';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
@@ -26,6 +27,7 @@ import SaveIcon from '@mui/icons-material/Save';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Modal from '@mui/material/Modal';
+import { useHistory } from "react-router-dom";
 import { confirmAlert } from 'react-confirm-alert';
 import "../confirm-alert.css"
 
@@ -99,6 +101,9 @@ TabPanel.propTypes = {
 const theme = createTheme();
 
 export default function Admin() {
+    const history = useHistory();
+    const ruta = () => history.push('/Registroadm1n')
+
     const[estudiantes, setEstudiantes] = useState([])
     const[contactos, setContactos] = useState([])
     const[resultados, setResultados] = useState([])
@@ -333,6 +338,13 @@ export default function Admin() {
                 <SupervisorAccountIcon/>
             </Avatar>
             <Typography component="h1" variant="h3" color="blue">Perfil Administrador</Typography>
+            </Box>
+            <Box sx={{ marginTop: 4, display: 'flex', flexDirection: 'row', alignItems: 'justify' }}>
+            <Typography variant="subtitle1">
+            Desde esta página podrá gestionar las 3 tablas almacenadas en MongoDB: la tabla de estudiantes registrados, la tabla de resultados del test Chaside por estudiante, y la tabla del formulario Contáctenos.
+            Si desea crear una nueva cuenta de Administrador:             
+              <Button variant="contained" startIcon={<AddModeratorIcon/>} onClick={ruta} sx={{ mt: 3, mb: 2, ml: 1 }} color="info">Registrar</Button>
+            </Typography>            
             </Box>
             <Box sx={{ bgcolor: '#E1E1DF', width: '100%' }}>
             <hr/>
