@@ -1,5 +1,4 @@
 import React from 'react'
-import { useHistory } from "react-router-dom";
 import CssBaseline from '@mui/material/CssBaseline';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -12,6 +11,7 @@ import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import ChromeReaderModeIcon from '@mui/icons-material/ChromeReaderMode';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Introtest from './Introtest';
@@ -20,6 +20,11 @@ import Page2 from './Page2';
 import Page3 from './Page3';
 import Page4 from './Page4';
 import Page5 from './Page5';
+//import { useHistory } from "react-router-dom";
+//import Axios from 'axios'
+//import Swal from 'sweetalert2'
+//import { listaRespuestas } from "./Chaside";
+import { ValidarPreg } from "./Chaside";
 
 const steps = ['Intro', 'Página 1', 'Página 2', 'Página 3', 'Página 4', 'Página 5'];
 
@@ -45,9 +50,8 @@ function getStepContent(step) {
 const theme = createTheme();
 
 export default function Test() {
-
-    const history = useHistory();
-    const ruta = () => history.push('/Resultados')
+    //const history = useHistory();
+    //const ruta = () => history.push('/Resultados')
 
     const [activeStep, setActiveStep] = React.useState(0);
     const handleNext = () => {
@@ -99,7 +103,8 @@ export default function Test() {
                   <Typography variant="h4" align="center" gutterBottom>
                     ¡Gracias por su tiempo!
                   </Typography>
-                  <Button variant="contained" startIcon={<ChromeReaderModeIcon/>} onClick={ruta} sx={{ mt: 3, mb: 2, ml: 39 }} color="info">Ver Resultado</Button>
+                  <Button variant="contained" startIcon={<ChromeReaderModeIcon/>} onClick={ValidarPreg} sx={{ mt: 3, mb: 2, ml: 39 }} color="info">Ver Resultado</Button>
+                  <Button variant="contained" startIcon={<ArrowBackIcon/>} onClick={handleBack} sx={{ mt: 1, mb: 1, ml: 41 }} color="info">Regresar</Button>
                 </React.Fragment>
                 ) : (
                 <React.Fragment>

@@ -35,10 +35,10 @@ export default function Profile() {
             <hr/>
             <Box sx={{ marginTop: 5, display: 'flex', flexDirection: 'column', alignItems: 'center', }} >
             <div>
-                <Stack direction="row" justifyContent="center" alignItems="center" spacing={7}>
-                    <img src="/img/Profile.jpg" alt="perfil" width="260" height="260"/>
+                <Stack direction="row" justifyContent="center" alignItems="center" spacing={4}>
+                    <img src="/img/Profile.png" alt="perfil" width="170" height="170"/>
                     <img src="/img/Update.jpg" alt="actualizar" width="250" height="250"/>
-                    <img src="/img/Delete.png" alt="eliminar" width="190" height="190"/>
+                    <img src="/img/Delete.png" alt="eliminar" width="180" height="180"/>
                     <img src="/img/Test.png" alt="test" width="200" height="200"/>
                     <img src="/img/Results.png" alt="resultado" width="200" height="200"/>
                 </Stack>
@@ -46,9 +46,9 @@ export default function Profile() {
             </Box>
             <Box sx={{ marginTop: 3, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
             <div>
-                <Stack direction="row" marginRight='22px' justifyContent="center" alignItems="center" spacing={13}>
+                <Stack direction="row" marginRight='25px' justifyContent="center" alignItems="left" spacing={10}>
                     <TextField disabled id="filled-basic" label="" variant="filled" value={identificacion} />
-                    <Button type="submit" variant="contained" sx={{ mt: 1, mb: 1, right: 12 }} color="info" onClick={navigateTo1}>Actualizar Datos</Button>
+                    <Button type="submit" variant="contained" sx={{ mt: 1, mb: 1, mr: 5 }} color="info" onClick={navigateTo1}>Actualizar Datos</Button>
                     <Button type="submit" variant="contained" sx={{ mt: 1, mb: 1 }} color="info" onClick={navigateTo2}>Eliminar Perfil</Button>
                     <Button type="submit" variant="contained" sx={{ mt: 1, mb: 1 }} color="info" onClick={navigateTo3}>Test CHASIDE</Button>
                     <Button type="submit" variant="contained" sx={{ mt: 1, mb: 1 }} color="info" onClick={navigateTo4}>Resultados</Button>

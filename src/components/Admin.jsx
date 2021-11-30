@@ -451,6 +451,7 @@ export default function Admin() {
                             <StyledTableCell align="center">Rama Intereses</StyledTableCell>
                             <StyledTableCell align="center">Letra Aptitudes</StyledTableCell>
                             <StyledTableCell align="center">Rama Aptitudes</StyledTableCell>
+                            <StyledTableCell align="center">Lista Respuestas</StyledTableCell>
                             <StyledTableCell align="center">Acciones</StyledTableCell>
                         </TableRow>
                         </TableHead>
@@ -464,6 +465,7 @@ export default function Admin() {
                             <StyledTableCell align="center">{resultado.ramaintereses}</StyledTableCell>
                             <StyledTableCell align="center">{resultado.letraaptitudes}</StyledTableCell>
                             <StyledTableCell align="center">{resultado.ramaaptitudes}</StyledTableCell>
+                            <StyledTableCell align="center">{resultado.preguntasafirmativas}</StyledTableCell>
                             <StyledTableCell align="center">
                             <Button variant="contained" sx={{ mt: 1, mb: 1 }} onClick={()=>confirmdelres(resultado._id)} color="error">Eliminar</Button>
                             </StyledTableCell>

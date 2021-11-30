@@ -51,7 +51,7 @@ export default function Resultados() {
     const [letraaptitudes, setLetraaptitudes] = useState('')
     const [ramaintereses, setRamaintereses] = useState('')
     const [ramaaptitudes, setRamaaptitudes] = useState('')
-	  //const [preguntasafirmativas, setPreguntasAfirmativas] = useState('')
+	  const [preguntasafirmativas, setPreguntasAfirmativas] = useState('')
     
     useEffect( ()=>{
         listarResultados()
@@ -92,6 +92,7 @@ export default function Resultados() {
         letraaptitudes:'',
         ramaintereses:'',
         ramaaptitudes:'',
+        preguntasafirmativas:'',
       }
       const aux = await Axios.put('/resultados/actualizar/'+id, resultado,{
           headers:{'autorizacion':token}
@@ -130,7 +131,7 @@ export default function Resultados() {
         setLetraaptitudes(respuesta.data.letraaptitudes)
         setRamaintereses(respuesta.data.ramaintereses)
         setRamaaptitudes(respuesta.data.ramaaptitudes)
-        //setPreguntasAfirmativas(resultados.preguntasafirmativas)
+        setPreguntasAfirmativas(respuesta.data.preguntasafirmativas)
       }
 
     return (
@@ -161,6 +162,7 @@ export default function Resultados() {
                             <StyledTableCell align="center">Rama Intereses</StyledTableCell>
                             <StyledTableCell align="center">Letra Aptitudes</StyledTableCell>
                             <StyledTableCell align="center">Rama Aptitudes</StyledTableCell>
+                            <StyledTableCell align="center">Lista Respuestas</StyledTableCell>
                             <StyledTableCell align="center">Acciones</StyledTableCell>
                         </TableRow>
                         </TableHead>
@@ -172,6 +174,7 @@ export default function Resultados() {
                             <StyledTableCell align="center">{ramaintereses}</StyledTableCell>
                             <StyledTableCell align="center">{letraaptitudes}</StyledTableCell>
                             <StyledTableCell align="center">{ramaaptitudes}</StyledTableCell>
+                            <StyledTableCell align="center">{preguntasafirmativas}</StyledTableCell>
                             <StyledTableCell align="center">
                             <Button type="submit" variant="contained" sx={{ mt: 1, mb: 1 }} onClick={()=>confirmar()} color="warning">Repetir Test</Button>
                             </StyledTableCell>
