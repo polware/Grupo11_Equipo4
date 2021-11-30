@@ -10,6 +10,8 @@ router.post('/login', estudianteController.login);
 router.get('/listarID/:id', Authest.verificarToken, estudianteController.listarID);
 router.delete('/eliminar/:id', Authest.verificarToken, estudianteController.eliminar);
 router.put('/actualizar/:id', Authest.verificarToken, estudianteController.actualizar);
+router.get('/buscarCorreo/:correo', estudianteController.buscarCorreo);
+router.put('/passwordUpdate/:id', estudianteController.passwordUpdate);
 
 // Administrador
 router.get('/listar', Auth.verificarToken, estudianteController.listar);

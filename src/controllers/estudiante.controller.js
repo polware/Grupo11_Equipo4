@@ -71,6 +71,19 @@ estudianteControl.listarID = async(req,res) => {
     res.json(respuesta)
 }
 
+estudianteControl.buscarCorreo = async(req,res) => {
+    const email = req.params.correo;
+    const respuesta = await estudiante.findOne({correo:email});
+    if(respuesta === null){
+        res.json({
+            mensaje:'Null'
+        })
+    }
+    else{
+        res.json(respuesta)
+    }    
+}
+
 estudianteControl.eliminarAdmin = async(req,res) => {
     const id = req.params.id;
     await estudiante.findByIdAndRemove({_id:id});
@@ -92,6 +105,14 @@ estudianteControl.actualizarAdmin = async(req,res) => {
     await estudiante.findByIdAndUpdate({_id:id}, req.body)
     res.json({
         mensaje:'Estudiante actualizado'
+    })
+}
+
+estudianteControl.passwordUpdate = async(req,res) => {
+    const id = req.params.id;
+    await estudiante.findByIdAndUpdate({_id:id}, req.body)
+    res.json({
+        mensaje:'Su contraseña ha sido actualizada'
     })
 }
 
