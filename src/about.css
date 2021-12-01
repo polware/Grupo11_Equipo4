@@ -26,7 +26,6 @@
 .about-img{
     display: flex;
     align-self:center;
-    overflow: hidden;
 }
 
 .carousel-container{

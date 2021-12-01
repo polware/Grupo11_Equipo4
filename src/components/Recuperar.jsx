@@ -100,7 +100,7 @@ export default function Recuperar() {
           setTimeout(()=>{
               window.location.href='/'
           },2500)
-          setOpen(false)        
+          setOpen(false)
       }
       else {
           document.getElementById('password1').style.backgroundColor = 'yellow';
@@ -164,7 +164,7 @@ export default function Recuperar() {
                   <Avatar sx={{ m: 1, bgcolor: 'warning.main', ml: 42 }}>
                       <VpnKeyIcon/>
                   </Avatar>
-                  <Typography id="modal-modal-title" variant="h4" component="h1" align="center" color="blue">
+                  <Typography id="modal-modal-title" variant="h4" component="h1" align="center" color="orange">
                    Cambiar Contraseña
                    </Typography>
                    <hr/>
@@ -176,7 +176,7 @@ export default function Recuperar() {
                        <TextField required id="password2" label="Repita nueva Contraseña" type="password" fullWidth />
                         </Grid>
                     </Grid>
-                    <Button variant="contained" startIcon={<SaveIcon/>} sx={{ mt: 3, mb: 2, ml: 30 }} color="success" onClick={actualizar}>Guardar</Button>&nbsp;
+                    <Button variant="contained" startIcon={<SaveIcon/>} sx={{ mt: 3, mb: 2, ml: 30 }} color="warning" onClick={actualizar}>Guardar</Button>&nbsp;
                     <Button variant="contained" startIcon={<CancelPresentationIcon/>} onClick={handleClose} sx={{ mt: 3, mb: 2 }} color="info">Cerrar</Button>
                  </Box>
               </Modal>
